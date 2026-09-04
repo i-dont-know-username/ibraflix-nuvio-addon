@@ -1,0 +1,36 @@
+{
+  "id": "com.ibraflix.productions",
+  "version": "1.0.0",
+  "name": "Ibraflix Productions",
+  "description": "Ibraflix Productions Addon by Ibrahim Productions.",
+  "logo": "https://i.postimg.cc/xNMfxq3m/New-Project-(23).png",
+  "resources": [
+    "catalog",
+    "meta",
+    "stream",
+    "subtitles"
+  ],
+  "types": [
+    "tv"
+  ],
+  "idPrefixes": [
+    "tt",
+    "tmdb:"
+  ],
+  "catalogs": [
+    {
+      "type": "tv",
+      "id": "ibraflix-supernatural-powers",
+      "name": "Supernatural Powers",
+      "extra": [
+        {
+          "name": "search",
+          "isRequired": false
+        }
+      ]
+    }
+  ],
+  "behaviorHints": {
+    "configurable": false
+  }
+}
