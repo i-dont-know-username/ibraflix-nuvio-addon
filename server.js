@@ -32,7 +32,7 @@ const SHOW = {
 // Episode video sources – add future episodes here
 const EPISODES = {
   '1:1': {
-    url: 'https://0807.st/epiNrPV.mp4',
+    url: 'https://cdn.pixabay.com/video/2025/09/22/305657_large.mp4',
     quality: '1080p',
     title: 'Supernatural Powers — S01E01'
   }
