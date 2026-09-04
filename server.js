@@ -4,14 +4,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const SHOW = {
-  id: 'tmdb:333643',
+  id: 'tmdb-333643',
   type: 'series',
   name: 'Supernatural Powers',
   description: 'A creator-made series from Ibraflix Productions.',
   genres: [],
   videos: [
     {
-      id: 'tmdb:333643:1:1',
+      id: 'tmdb-333643:1:1',
       season: 1,
       number: 1,
       title: 'Episode 1',
@@ -114,7 +114,7 @@ app.get('/catalog/series/ibraflix.supernatural-powers.json', (req, res) => {
   return json(res, { metas: matches });
 });
 
-app.get('/meta/series/tmdb:333643.json', (req, res) => {
+app.get('/meta/series/tmdb-333643.json', (req, res) => {
   return json(res, {
     meta: {
       id: SHOW.id,
@@ -129,7 +129,7 @@ app.get('/meta/series/tmdb:333643.json', (req, res) => {
 
 app.get('/stream/series/:id.json', (req, res) => {
   const rawId = decodeURIComponent(req.params.id);
-  const match = rawId.match(/^tmdb:333643:(\d+):(\d+)$/);
+  const match = rawId.match(/^tmdb-333643:(\d+):(\d+)$/);
 
   if (!match) return json(res, { streams: [] });
 
@@ -151,7 +151,7 @@ app.get('/stream/series/:id.json', (req, res) => {
 
 app.get('/subtitles/series/:id.json', (req, res) => {
   const rawId = decodeURIComponent(req.params.id);
-  const match = rawId.match(/^tmdb:333643:(\d+):(\d+)$/);
+  const match = rawId.match(/^tmdb-333643:(\d+):(\d+)$/);
 
   if (!match) return json(res, { subtitles: [] });
 
