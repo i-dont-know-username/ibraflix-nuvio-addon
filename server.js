@@ -18,7 +18,7 @@ const SHOW = {
       title: 'Episode 1',
       name: 'Episode 1'
     }
-    // Add future episodes here, e.g.:
+    // Add future episodes here:
     // {
     //   id: 'tmdb:333643:1:2',
     //   season: 1,
@@ -104,41 +104,96 @@ app.get('/catalog/tv/ibraflix-supernatural-powers.json', (req, res) => {
   return json(res, { metas: matches });
 });
 
-// Metadata – generic route that handles both the show and individual episodes
+// Metadata – handles both the show and individual episodes
 app.get('/meta/tv/:id.json', (req, res) => {
   const id = req.params.id;
+  console.log('[Ibraflix] Meta requested for ID:', id);
 
   // If it's the full show
-  if (id === SHOW_ID) {
+  if (id === SHOW_ID || id === '333643' || id === 'tmdb-333643') {
     return json(res, { meta: SHOW });
   }
 
-  // If it's an episode (format: tmdb:333643:season:episode)
-  const match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
-  if (match) {
-    const season = parseInt(match[1], 10);
-    const episode = parseInt(match[2], 10);
+  // Try to extract season/episode from various formats
+  let season, episode;
+  let match;
+
+  // Format 1: tmdb:333643:1:1
+  match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
+  if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+
+  // Format 2: tmdb-333643:1:1
+  if (!season) {
+    match = id.match(/^tmdb-333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  // Format 3: 333643:1:1
+  if (!season) {
+    match = id.match(/^333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  // Format 4: anything with :333643:1:1 (fallback)
+  if (!season) {
+    match = id.match(/:333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  if (season && episode) {
     const ep = SHOW.videos.find(v => v.season === season && v.number === episode);
     if (ep) {
-      // Return only that episode's metadata
       return json(res, { meta: { ...SHOW, videos: [ep] } });
     }
   }
 
-  // Not found
   return json(res, { meta: null });
 });
 
 // Streams – returns the direct video URL
 app.get('/stream/tv/:id.json', (req, res) => {
   const id = req.params.id;
-  const match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
-  if (!match) return json(res, { streams: [] });
+  console.log('[Ibraflix] Stream requested for ID:', id);
 
-  const key = match[1] + ':' + match[2];
+  let season, episode;
+  let match;
+
+  // Format 1: tmdb:333643:1:1
+  match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
+  if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+
+  // Format 2: tmdb-333643:1:1
+  if (!season) {
+    match = id.match(/^tmdb-333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  // Format 3: 333643:1:1
+  if (!season) {
+    match = id.match(/^333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  // Format 4: anything with :333643:1:1 (fallback)
+  if (!season) {
+    match = id.match(/:333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  if (!season || !episode) {
+    console.log('[Ibraflix] No season/episode extracted from ID:', id);
+    return json(res, { streams: [] });
+  }
+
+  const key = season + ':' + episode;
   const ep = EPISODES[key];
-  if (!ep) return json(res, { streams: [] });
 
+  if (!ep) {
+    console.log('[Ibraflix] No URL found for key:', key);
+    return json(res, { streams: [] });
+  }
+
+  console.log('[Ibraflix] Returning stream for:', key, '->', ep.url);
   return json(res, {
     streams: [{
       name: 'Ibraflix Productions',
@@ -152,10 +207,32 @@ app.get('/stream/tv/:id.json', (req, res) => {
 // Subtitles – returns subtitle URLs (currently empty)
 app.get('/subtitles/tv/:id.json', (req, res) => {
   const id = req.params.id;
-  const match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
-  if (!match) return json(res, { subtitles: [] });
+  console.log('[Ibraflix] Subtitles requested for ID:', id);
 
-  const key = match[1] + ':' + match[2];
+  let season, episode;
+  let match;
+
+  // Same flexible parsing as streams
+  match = id.match(/^tmdb:333643:(\d+):(\d+)$/);
+  if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  if (!season) {
+    match = id.match(/^tmdb-333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+  if (!season) {
+    match = id.match(/^333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+  if (!season) {
+    match = id.match(/:333643:(\d+):(\d+)$/);
+    if (match) { season = parseInt(match[1], 10); episode = parseInt(match[2], 10); }
+  }
+
+  if (!season || !episode) {
+    return json(res, { subtitles: [] });
+  }
+
+  const key = season + ':' + episode;
   return json(res, { subtitles: SUBTITLES[key] || [] });
 });
 
