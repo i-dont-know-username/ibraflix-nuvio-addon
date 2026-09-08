@@ -58,7 +58,7 @@ const CONTENT_DB = {
 const STREAM_DB = {
   // For TV episodes – use the full episode ID
   'tmdb:333643:1:1': {
-    url: 'https://0807.st/epiNrPV.mp4',
+    url: 'https://0807.st/PG6Kbmw?dl=1',
     quality: '1080p',
     title: 'Supernatural Powers — S01E01'
   }
