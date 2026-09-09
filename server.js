@@ -16,8 +16,7 @@ const CONTENT_DB = {
     // ✅ POSTER – using your TMDB image
     poster: 'https://media.themoviedb.org/t/p/w500/AfLmDw7Fp3q2um4qi4TcmOGwKxf.jpg',
     posterShape: 'regular',
-    // Optional backdrop (16:9)
-    // background: 'https://media.themoviedb.org/t/p/original/your-backdrop.jpg',
+    background: 'https://media.themoviedb.org/t/p/w1000_and_h563_face/79jotgSs9KksQ8UCRkhRnrBtDtO.jpg',
     videos: [
       {
         id: 'tmdb:333643:1:1',
