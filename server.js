@@ -24,9 +24,16 @@ const CONTENT_DB = {
         number: 1,
         title: 'Episode 1',
         name: 'Episode 1',
-        // Optional thumbnail for the episode
-        // thumbnail: 'https://media.themoviedb.org/t/p/w500/ep1-thumb.jpg'
-      }
+        thumbnail: 'https://media.themoviedb.org/t/p/w227_and_h127_face/c7o9OSc3F2gXCRPlUIN1T3cVBq8.jpg'
+      },
+      {
+        id: 'tmdb:333643:1:1',
+        season: 1,
+        number: 2,
+        title: 'Episode 2',
+        name: 'Episode 2',
+        thumbnail: 'https://media.themoviedb.org/t/p/w227_and_h127_face/15emGYpFSBKQl8mWgs7z0iXzh1M.jpg'
+      }      
       // Add more episodes here:
       // {
       //   id: 'tmdb:333643:1:2',
