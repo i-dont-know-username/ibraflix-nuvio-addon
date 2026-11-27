@@ -57,7 +57,7 @@ const CONTENT_DB = {
 const STREAM_DB = {
   // For TV episodes – use the full episode ID
   'tmdb:333643:1:1': {
-    url: 'https://0807.st/PG6Kbmw?dl=1',
+    url: 'https://github.com/i-dont-know-username/ibraflix-nuvio-addon/releases/download/series/copy_11EC7F8A-3587-475D-82A5-9AD371D098C2.mov',
     quality: '1080p',
     title: 'Supernatural Powers — S01E01'
   }
