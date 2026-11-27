@@ -27,7 +27,7 @@ const CONTENT_DB = {
         thumbnail: 'https://media.themoviedb.org/t/p/w227_and_h127_face/c7o9OSc3F2gXCRPlUIN1T3cVBq8.jpg'
       },
       {
-        id: 'tmdb:333643:1:1',
+        id: 'tmdb:333643:1:2',
         season: 1,
         number: 2,
         title: 'Episode 2',
