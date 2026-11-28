@@ -17,6 +17,8 @@ const CONTENT_DB = {
     poster: 'https://media.themoviedb.org/t/p/w500/AfLmDw7Fp3q2um4qi4TcmOGwKxf.jpg',
     posterShape: 'regular',
     background: 'https://media.themoviedb.org/t/p/w1000_and_h563_face/79jotgSs9KksQ8UCRkhRnrBtDtO.jpg',
+    // ✅ CUSTOM LOGO – your own title logo
+    logo: 'https://raw.githubusercontent.com/i-dont-know-username/ibraflix-nuvio-addon/refs/heads/main/pasted-image-2026-11-28T00-52-11-794Z.png',
     videos: [
       {
         id: 'tmdb:333643:1:1',
