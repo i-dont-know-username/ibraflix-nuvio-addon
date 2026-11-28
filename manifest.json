@@ -11,7 +11,7 @@
     "subtitles"
   ],
   "types": [
-    "tv"
+    "series"
   ],
   "idPrefixes": [
     "tt",
@@ -19,7 +19,7 @@
   ],
   "catalogs": [
     {
-      "type": "tv",
+      "type": "series",
       "id": "ibraflix-supernatural-powers",
       "name": "Supernatural Powers",
       "extra": [
